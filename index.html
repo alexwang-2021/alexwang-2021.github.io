@@ -6,73 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>上海创业服务</title>
     <style>
-        * {
+        body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            font-family: Arial, "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
         }
 
 ```
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "SimHei", sans-serif;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-    }
-
     .container {
         max-width: 900px;
-        width: 100%;
+        margin: 0 auto;
+        padding: 50px 20px;
         text-align: center;
     }
 
     h1 {
         color: white;
-        font-size: 2.5rem;
-        margin-bottom: 50px;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        font-size: 40px;
+        margin-bottom: 60px;
     }
 
-    .links {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .link-card {
+    a {
+        display: block;
         background: white;
         padding: 30px;
+        margin-bottom: 20px;
         border-radius: 12px;
         text-decoration: none;
         color: #333;
-        font-size: 1.3rem;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        transition: all 0.3s ease;
-        display: block;
+        font-size: 22px;
     }
 
-    .link-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-    }
-
-    .link-card span {
-        font-size: 2rem;
-        margin-right: 15px;
-        display: inline-block;
-    }
-
-    @media (max-width: 768px) {
-        h1 {
-            font-size: 2rem;
-        }
-        .link-card {
-            font-size: 1.1rem;
-            padding: 25px;
-        }
+    a:hover {
+        background: #f0f0f0;
     }
 </style>
 ```
@@ -83,19 +51,9 @@
         <h1>上海创业服务</h1>
 
 ```
-    <div class="links">
-        <a href="gaoxin-ziyuan.html" class="link-card">
-            <span>🚀</span>高新资源
-        </a>
-        
-        <a href="gaoxin-zhuanrang.html" class="link-card">
-            <span>📋</span>高新转让指南
-        </a>
-        
-        <a href="liuxuesheng-luohu.html" class="link-card">
-            <span>🎓</span>留学生高新落户指南
-        </a>
-    </div>
+    <a href="gaoxin-ziyuan.html">🚀 高新资源</a>
+    <a href="gaoxin-zhuanrang.html">📋 高新转让指南</a>
+    <a href="liuxuesheng-luohu.html">🎓 留学生高新落户指南</a>
 </div>
 ```
 
