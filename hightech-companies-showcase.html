@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高新技术企业资源库</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: #f5f7fa;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.85;
+            margin-top: 4px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .filter-bar {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-label {
+            font-weight: 500;
+            color: #666;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .filter-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 24px;
+        }
+
+        .company-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .company-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            border-color: #667eea;
+        }
+
+        .company-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .company-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .company-title {
+            flex: 1;
+        }
+
+        .company-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 4px;
+        }
+
+        .company-id {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 12px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-badge.available {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status-badge.reserved {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .attributes {
+            display: grid;
+            gap: 12px;
+        }
+
+        .attribute-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .attribute-item:hover {
+            background: #f0f2f5;
+        }
+
+        .attribute-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .attribute-content {
+            flex: 1;
+        }
+
+        .attribute-label {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 2px;
+        }
+
+        .attribute-value {
+            font-size: 15px;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .highlight {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .contact-btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .companies-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .stats {
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🏢 高新技术企业资源库</h1>
+        <p>优质壳公司资源 · 合作渠道专属</p>
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">20</div>
+                <div class="stat-label">可用企业</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">高新认证</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">24H</div>
+                <div class="stat-label">快速响应</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="filter-bar">
+            <span class="filter-label">筛选：</span>
+            <button class="filter-btn active" onclick="filterCompanies('all')">全部</button>
+            <button class="filter-btn" onclick="filterCompanies('2024')">2024年认证</button>
+            <button class="filter-btn" onclick="filterCompanies('2023')">2023年认证</button>
+            <button class="filter-btn" onclick="filterCompanies('available')">可用</button>
+        </div>
+
+        <div class="companies-grid" id="companiesGrid">
+            <!-- 公司1 -->
+            <div class="company-card" data-year="2024" data-status="available">
+                <div class="company-header">
+                    <div class="company-icon">🔬</div>
+                    <div class="company-title">
+                        <div class="company-name">XX智能科技有限公司</div>
+                        <div class="company-id">编号：GX2024001</div>
+                    </div>
+                    <span class="status-badge available">●可用</span>
+                </div>
+                <div class="attributes">
+                    <div class="attribute-item">
+                        <span class="attribute-icon">📅</span>
+                        <div class="attribute-content">
+                            <div class="attribute-label">高新认证</div>
+                            <div class="attribute-value">2024年高新</div>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-icon">📊</span>
+                        <div class="attribute-content">
+                            <div class="attribute-label">2024年开票额</div>
+                            <div class="attribute-value"><span class="highlight">10万</span></div>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-icon">📈</span>
+                        <div class="attribute-content">
+                            <div class="attribute-label">2025年开票额</div>
+                            <div class="attribute-value"><span class="highlight">30万</span></div>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-icon">🏭</span>
+                        <div class="attribute-content">
+                            <div class="attribute-label">注册地</div>
+                            <div class="attribute-value">深圳市南山区</div>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-icon">💼</span>
+                        <div class="attribute-content">
+                            <div class="attribute-label">主营业务</div>
+                            <div class="attribute-value">软件开发、技术服务</div>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-icon">✅</span>
+                        <div class="attribute-content">
+                            <div class="attribute-label">资质状态</div>
+                            <div class="attribute-value">证照齐全，无异常</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="contact-btn" onclick="contactUs('GX2024001')">立即咨询</button>
+            </div>
+
+            <!-- 公司2 -->
+            <div class="company-card" data-year="2024" data-status="available">
+                <div class="company-header">
+                    <div class="company-icon">⚡</div>
+                    <div class="company-title">
+                        <div class="company-name">XX新能源技术有限公司</div>
+                        <div class="company-id">编号：GX2024002</div>
+                    </div>
+                    <span class="status-badge available">●可用</span>
+                </div>
+                <div class="attributes">
+                    <div class="attribute-item">
+                        <span class="attribute-icon">📅</span>
+                        <div class="attribute-content">
+                            <div class="attribute-label">高新认证</div>
+                            <div class="attribute-value">2024年高新</div>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-icon">📊</span>
+                        <div class="attribute-content">
+                            <div class="attribute-label">2024年开票额</div>
+                            <div class="attribute-value"><span class="highlight">15万</span></div>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-icon">📈</span>
+                        <div class="attribute-content">
+                            <div class="attribute-label">2025年开票额</div>
+                            <div class="attribute-value"><span class="highlight">40万</span></div>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-icon">🏭</span>
+                        <div class="attribute-content">
+                            <div class="attribute-label">注册地</div>
+                            <div class="attribute-value">北京市海淀区</div>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-icon">💼</span>
+                        <div class="attribute-content">
+                            <div class="attribute-label">主营业务</div>
+                            <div class="attribute-value">新能源技术研发</div>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-icon">✅</span>
+                        <div class="attribute-content">
+                            <div class="attribute-label">资质状态</div>
+                            <div class="attribute-value">证照齐全，无异常</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="contact-btn" onclick="contactUs('GX2024002')">立即咨询</button>
+            </div>
+
+            <!-- 公司3 -->
+            <div class="company-card" data-year="2023" data-status="reserved">
+                <div class="company-header">
+                    <div class="company-icon">🤖</div>
+                    <div class="company-title">
+                        <div class="company-name">XX人工智能科技公司</div>
+                        <div class="company-id">编号：GX2023001</div>
+                    </div>
+                    <span class="status-badge reserved">●预留中</span>
+                </div>
+                <div class="attributes">
+                    <div class="attribute-item">
+                        <span class="attribute-icon">📅</span>
+                        <div class="attribute-content">
+                            <div class="attribute-label">高新认证</div>
+                            <div class="attribute-value">2023年高新</div>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-icon">📊</span>
+                        <div class="attribute-content">
+                            <div class="attribute-label">2024年开票额</div>
+                            <div class="attribute-value"><span class="highlight">20万</span></div>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-icon">📈</span>
+                        <div class="attribute-content">
+                            <div class="attribute-label">2025年开票额</div>
+                            <div class="attribute-value"><span class="highlight">50万</span></div>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-icon">🏭</span>
+                        <div class="attribute-content">
+                            <div class="attribute-label">注册地</div>
+                            <div class="attribute-value">上海市浦东新区</div>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-icon">💼</span>
+                        <div class="attribute-content">
+                            <div class="attribute-label">主营业务</div>
+                            <div class="attribute-value">AI算法、机器学习</div>
+                        </div>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-icon">✅</span>
+                        <div class="attribute-content">
+                            <div class="attribute-label">资质状态</div>
+                            <div class="attribute-value">证照齐全，无异常</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="contact-btn" onclick="contactUs('GX2023001')">立即咨询</button>
+            </div>
+
+            <!-- 继续添加更多公司... -->
+            <!-- 您可以复制上面的模板，修改数据即可 -->
+
+        </div>
+    </div>
+
+    <script>
+        function filterCompanies(filter) {
+            const cards = document.querySelectorAll('.company-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            // 更新按钮状态
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // 筛选卡片
+            cards.forEach(card => {
+                if (filter === 'all') {
+                    card.style.display = 'block';
+                } else if (filter === '2024') {
+                    card.style.display = card.dataset.year === '2024' ? 'block' : 'none';
+                } else if (filter === '2023') {
+                    card.style.display = card.dataset.year === '2023' ? 'block' : 'none';
+                } else if (filter === 'available') {
+                    card.style.display = card.dataset.status === 'available' ? 'block' : 'none';
+                }
+            });
+        }
+
+        function contactUs(companyId) {
+            alert('咨询公司：' + companyId + '\n\n请联系客户经理获取更多信息');
+            // 这里可以改成实际的联系方式，比如跳转到联系表单、打开微信等
+        }
+    </script>
+</body>
+</html>
