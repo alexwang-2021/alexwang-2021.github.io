@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高新技术企业资源库</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .target-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #2d3748;
+            font-weight: 600;
+        }
+
+        .meta-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #718096;
+            font-size: 14px;
+        }
+
+        .meta-label {
+            color: #a0aec0;
+        }
+
+        .meta-value {
+            color: #2d3748;
+            font-weight: 500;
+        }
+
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 24px;
+        }
+
+        .company-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .company-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            border-color: #667eea;
+        }
+
+        .company-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .company-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .company-title {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .company-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 4px;
+        }
+
+        .company-id {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .price-tag {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ff6b00;
+            white-space: nowrap;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 12px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .attributes {
+            display: grid;
+            gap: 10px;
+        }
+
+        .attribute-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .attribute-label {
+            color: #666;
+            min-width: 80px;
+        }
+
+        .attribute-value {
+            color: #2d3748;
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .highlight {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .contact-btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .companies-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 20px;
+            }
+
+            .price-tag {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-top">
+                <div class="target-icon">🎯</div>
+                <div>
+                    <h1>高新技术企业资源库</h1>
+                </div>
+            </div>
+            <div class="meta-info">
+                <div class="meta-item">
+                    <span class="meta-label">可用企业：</span>
+                    <span class="meta-value">20家</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">高新认证：</span>
+                    <span class="meta-value">100%</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">咨询微信：</span>
+                    <span class="meta-value">18917875149</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="companies-grid">
+            <!-- 公司1 - 指定产品 -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">🔬</div>
+                    <div class="company-title">
+                        <div class="company-name">上海XX智能科技有限公司</div>
+                        <div class="company-id">编号：GX001</div>
+                    </div>
+                    <div class="price-tag">32万</div>
+                </div>
+                <span class="status-badge">● 可用</span>
+                <div class="attributes">
+                    <div class="attribute-item">
+                        <span class="attribute-label">地区类型</span>
+                        <span class="attribute-value">上海高新，技术类</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">认定年份</span>
+                        <span class="attribute-value">(2024) 年认定的高新</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">企业规模</span>
+                        <span class="attribute-value">小规模</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">23年营收</span>
+                        <span class="attribute-value highlight">30万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">24年营收</span>
+                        <span class="attribute-value highlight">10万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">25年营收</span>
+                        <span class="attribute-value highlight">35万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">知识产权</span>
+                        <span class="attribute-value">著作权权</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">补贴状态</span>
+                        <span class="attribute-value">补贴未领取</span>
+                    </div>
+                </div>
+                <button class="contact-btn" onclick="contact('GX001')">立即咨询</button>
+            </div>
+
+            <!-- 公司2 -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">⚡</div>
+                    <div class="company-title">
+                        <div class="company-name">上海XX新能源技术公司</div>
+                        <div class="company-id">编号：GX002</div>
+                    </div>
+                    <div class="price-tag">68万</div>
+                </div>
+                <span class="status-badge">● 可用</span>
+                <div class="attributes">
+                    <div class="attribute-item">
+                        <span class="attribute-label">地区类型</span>
+                        <span class="attribute-value">上海高新，技术类</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">认定年份</span>
+                        <span class="attribute-value">(2024) 年认定的高新</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">企业规模</span>
+                        <span class="attribute-value">一般纳税人</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">23年营收</span>
+                        <span class="attribute-value highlight">80万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">24年营收</span>
+                        <span class="attribute-value highlight">50万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">25年营收</span>
+                        <span class="attribute-value highlight">90万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">知识产权</span>
+                        <span class="attribute-value">软件著作权5个</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">补贴状态</span>
+                        <span class="attribute-value">补贴未领取</span>
+                    </div>
+                </div>
+                <button class="contact-btn" onclick="contact('GX002')">立即咨询</button>
+            </div>
+
+            <!-- 公司3 -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">🧬</div>
+                    <div class="company-title">
+                        <div class="company-name">上海XX生物科技有限公司</div>
+                        <div class="company-id">编号：GX003</div>
+                    </div>
+                    <div class="price-tag">55万</div>
+                </div>
+                <span class="status-badge">● 可用</span>
+                <div class="attributes">
+                    <div class="attribute-item">
+                        <span class="attribute-label">地区类型</span>
+                        <span class="attribute-value">上海高新，生物技术类</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">认定年份</span>
+                        <span class="attribute-value">(2023) 年认定的高新</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">企业规模</span>
+                        <span class="attribute-value">小规模</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">23年营收</span>
+                        <span class="attribute-value highlight">45万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">24年营收</span>
+                        <span class="attribute-value highlight">25万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">25年营收</span>
+                        <span class="attribute-value highlight">60万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">知识产权</span>
+                        <span class="attribute-value">软件著作权3个</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">补贴状态</span>
+                        <span class="attribute-value">补贴部分领取</span>
+                    </div>
+                </div>
+                <button class="contact-btn" onclick="contact('GX003')">立即咨询</button>
+            </div>
+
+            <!-- 公司4 -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">🤖</div>
+                    <div class="company-title">
+                        <div class="company-name">上海XX人工智能公司</div>
+                        <div class="company-id">编号：GX004</div>
+                    </div>
+                    <div class="price-tag">70万</div>
+                </div>
+                <span class="status-badge">● 可用</span>
+                <div class="attributes">
+                    <div class="attribute-item">
+                        <span class="attribute-label">地区类型</span>
+                        <span class="attribute-value">上海高新，人工智能</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">认定年份</span>
+                        <span class="attribute-value">(2024) 年认定的高新</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">企业规模</span>
+                        <span class="attribute-value">一般纳税人</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">23年营收</span>
+                        <span class="attribute-value highlight">100万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">24年营收</span>
+                        <span class="attribute-value highlight">70万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">25年营收</span>
+                        <span class="attribute-value highlight">120万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">知识产权</span>
+                        <span class="attribute-value">发明专利1个，软著6个</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">补贴状态</span>
+                        <span class="attribute-value">补贴未领取</span>
+                    </div>
+                </div>
+                <button class="contact-btn" onclick="contact('GX004')">立即咨询</button>
+            </div>
+
+            <!-- 公司5 -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">📡</div>
+                    <div class="company-title">
+                        <div class="company-name">深圳XX物联网科技公司</div>
+                        <div class="company-id">编号：GX005</div>
+                    </div>
+                    <div class="price-tag">62万</div>
+                </div>
+                <span class="status-badge">● 可用</span>
+                <div class="attributes">
+                    <div class="attribute-item">
+                        <span class="attribute-label">地区类型</span>
+                        <span class="attribute-value">深圳高新，物联网技术</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">认定年份</span>
+                        <span class="attribute-value">(2024) 年认定的高新</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">企业规模</span>
+                        <span class="attribute-value">一般纳税人</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">23年营收</span>
+                        <span class="attribute-value highlight">75万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">24年营收</span>
+                        <span class="attribute-value highlight">40万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">25年营收</span>
+                        <span class="attribute-value highlight">85万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">知识产权</span>
+                        <span class="attribute-value">软件著作权4个</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">补贴状态</span>
+                        <span class="attribute-value">补贴未领取</span>
+                    </div>
+                </div>
+                <button class="contact-btn" onclick="contact('GX005')">立即咨询</button>
+            </div>
+
+            <!-- 公司6 -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">💻</div>
+                    <div class="company-title">
+                        <div class="company-name">深圳XX电子科技公司</div>
+                        <div class="company-id">编号：GX006</div>
+                    </div>
+                    <div class="price-tag">58万</div>
+                </div>
+                <span class="status-badge">● 可用</span>
+                <div class="attributes">
+                    <div class="attribute-item">
+                        <span class="attribute-label">地区类型</span>
+                        <span class="attribute-value">深圳高新，电子技术</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">认定年份</span>
+                        <span class="attribute-value">(2024) 年认定的高新</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">企业规模</span>
+                        <span class="attribute-value">一般纳税人</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">23年营收</span>
+                        <span class="attribute-value highlight">60万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">24年营收</span>
+                        <span class="attribute-value highlight">35万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">25年营收</span>
+                        <span class="attribute-value highlight">70万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">知识产权</span>
+                        <span class="attribute-value">软件著作权3个</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">补贴状态</span>
+                        <span class="attribute-value">补贴未领取</span>
+                    </div>
+                </div>
+                <button class="contact-btn" onclick="contact('GX006')">立即咨询</button>
+            </div>
+
+            <!-- 公司7 -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">📶</div>
+                    <div class="company-title">
+                        <div class="company-name">深圳XX通信技术公司</div>
+                        <div class="company-id">编号：GX007</div>
+                    </div>
+                    <div class="price-tag">54万</div>
+                </div>
+                <span class="status-badge">● 可用</span>
+                <div class="attributes">
+                    <div class="attribute-item">
+                        <span class="attribute-label">地区类型</span>
+                        <span class="attribute-value">深圳高新，通信技术</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">认定年份</span>
+                        <span class="attribute-value">(2023) 年认定的高新</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">企业规模</span>
+                        <span class="attribute-value">小规模</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">23年营收</span>
+                        <span class="attribute-value highlight">50万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">24年营收</span>
+                        <span class="attribute-value highlight">30万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">25年营收</span>
+                        <span class="attribute-value highlight">55万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">知识产权</span>
+                        <span class="attribute-value">软件著作权2个</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">补贴状态</span>
+                        <span class="attribute-value">补贴部分领取</span>
+                    </div>
+                </div>
+                <button class="contact-btn" onclick="contact('GX007')">立即咨询</button>
+            </div>
+
+            <!-- 公司8 -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">📊</div>
+                    <div class="company-title">
+                        <div class="company-name">北京XX数据科技公司</div>
+                        <div class="company-id">编号：GX008</div>
+                    </div>
+                    <div class="price-tag">14万</div>
+                </div>
+                <span class="status-badge">● 可用</span>
+                <div class="attributes">
+                    <div class="attribute-item">
+                        <span class="attribute-label">地区类型</span>
+                        <span class="attribute-value">北京高新，大数据技术</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">认定年份</span>
+                        <span class="attribute-value">(2024) 年认定的高新</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">企业规模</span>
+                        <span class="attribute-value">小规模</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">23年营收</span>
+                        <span class="attribute-value highlight">25万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">24年营收</span>
+                        <span class="attribute-value highlight">15万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">25年营收</span>
+                        <span class="attribute-value highlight">30万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">知识产权</span>
+                        <span class="attribute-value">软件著作权2个</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">补贴状态</span>
+                        <span class="attribute-value">补贴未领取</span>
+                    </div>
+                </div>
+                <button class="contact-btn" onclick="contact('GX008')">立即咨询</button>
+            </div>
+
+            <!-- 公司9 -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">🌐</div>
+                    <div class="company-title">
+                        <div class="company-name">杭州XX网络科技公司</div>
+                        <div class="company-id">编号：GX009</div>
+                    </div>
+                    <div class="price-tag">13万</div>
+                </div>
+                <span class="status-badge">● 可用</span>
+                <div class="attributes">
+                    <div class="attribute-item">
+                        <span class="attribute-label">地区类型</span>
+                        <span class="attribute-value">杭州高新，网络技术</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">认定年份</span>
+                        <span class="attribute-value">(2024) 年认定的高新</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">企业规模</span>
+                        <span class="attribute-value">小规模</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">23年营收</span>
+                        <span class="attribute-value highlight">20万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">24年营收</span>
+                        <span class="attribute-value highlight">12万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">25年营收</span>
+                        <span class="attribute-value highlight">25万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">知识产权</span>
+                        <span class="attribute-value">软件著作权1个</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">补贴状态</span>
+                        <span class="attribute-value">补贴未领取</span>
+                    </div>
+                </div>
+                <button class="contact-btn" onclick="contact('GX009')">立即咨询</button>
+            </div>
+
+            <!-- 公司10 -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">🌿</div>
+                    <div class="company-title">
+                        <div class="company-name">广州XX环保科技公司</div>
+                        <div class="company-id">编号：GX010</div>
+                    </div>
+                    <div class="price-tag">15万</div>
+                </div>
+                <span class="status-badge">● 可用</span>
+                <div class="attributes">
+                    <div class="attribute-item">
+                        <span class="attribute-label">地区类型</span>
+                        <span class="attribute-value">广州高新，环保技术</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">认定年份</span>
+                        <span class="attribute-value">(2024) 年认定的高新</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">企业规模</span>
+                        <span class="attribute-value">小规模</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">23年营收</span>
+                        <span class="attribute-value highlight">28万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">24年营收</span>
+                        <span class="attribute-value highlight">18万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">25年营收</span>
+                        <span class="attribute-value highlight">32万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">知识产权</span>
+                        <span class="attribute-value">软件著作权2个</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">补贴状态</span>
+                        <span class="attribute-value">补贴未领取</span>
+                    </div>
+                </div>
+                <button class="contact-btn" onclick="contact('GX010')">立即咨询</button>
+            </div>
+
+            <!-- 公司11 -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">💿</div>
+                    <div class="company-title">
+                        <div class="company-name">成都XX软件开发公司</div>
+                        <div class="company-id">编号：GX011</div>
+                    </div>
+                    <div class="price-tag">13万</div>
+                </div>
+                <span class="status-badge">● 可用</span>
+                <div class="attributes">
+                    <div class="attribute-item">
+                        <span class="attribute-label">地区类型</span>
+                        <span class="attribute-value">成都高新，软件技术</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">认定年份</span>
+                        <span class="attribute-value">(2023) 年认定的高新</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">企业规模</span>
+                        <span class="attribute-value">小规模</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">23年营收</span>
+                        <span class="attribute-value highlight">22万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">24年营收</span>
+                        <span class="attribute-value highlight">10万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">25年营收</span>
+                        <span class="attribute-value highlight">20万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">知识产权</span>
+                        <span class="attribute-value">软件著作权1个</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">补贴状态</span>
+                        <span class="attribute-value">补贴部分领取</span>
+                    </div>
+                </div>
+                <button class="contact-btn" onclick="contact('GX011')">立即咨询</button>
+            </div>
+
+            <!-- 公司12 -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">💡</div>
+                    <div class="company-title">
+                        <div class="company-name">武汉XX光电科技公司</div>
+                        <div class="company-id">编号：GX012</div>
+                    </div>
+                    <div class="price-tag">14万</div>
+                </div>
+                <span class="status-badge">● 可用</span>
+                <div class="attributes">
+                    <div class="attribute-item">
+                        <span class="attribute-label">地区类型</span>
+                        <span class="attribute-value">武汉高新，光电技术</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">认定年份</span>
+                        <span class="attribute-value">(2024) 年认定的高新</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">企业规模</span>
+                        <span class="attribute-value">小规模</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">23年营收</span>
+                        <span class="attribute-value highlight">26万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">24年营收</span>
+                        <span class="attribute-value highlight">14万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">25年营收</span>
+                        <span class="attribute-value highlight">28万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">知识产权</span>
+                        <span class="attribute-value">软件著作权2个</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">补贴状态</span>
+                        <span class="attribute-value">补贴未领取</span>
+                    </div>
+                </div>
+                <button class="contact-btn" onclick="contact('GX012')">立即咨询</button>
+            </div>
+
+            <!-- 公司13 -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">🖥️</div>
+                    <div class="company-title">
+                        <div class="company-name">南京XX信息技术公司</div>
+                        <div class="company-id">编号：GX013</div>
+                    </div>
+                    <div class="price-tag">15万</div>
+                </div>
+                <span class="status-badge">● 可用</span>
+                <div class="attributes">
+                    <div class="attribute-item">
+                        <span class="attribute-label">地区类型</span>
+                        <span class="attribute-value">南京高新，信息技术</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">认定年份</span>
+                        <span class="attribute-value">(2024) 年认定的高新</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">企业规模</span>
+                        <span class="attribute-value">小规模</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">23年营收</span>
+                        <span class="attribute-value highlight">30万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">24年营收</span>
+                        <span class="attribute-value highlight">16万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">25年营收</span>
+                        <span class="attribute-value highlight">35万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">知识产权</span>
+                        <span class="attribute-value">软件著作权3个</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">补贴状态</span>
+                        <span class="attribute-value">补贴未领取</span>
+                    </div>
+                </div>
+                <button class="contact-btn" onclick="contact('GX013')">立即咨询</button>
+            </div>
+
+            <!-- 公司14 -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">🔬</div>
+                    <div class="company-title">
+                        <div class="company-name">西安XX新材料公司</div>
+                        <div class="company-id">编号：GX014</div>
+                    </div>
+                    <div class="price-tag">14万</div>
+                </div>
+                <span class="status-badge">● 可用</span>
+                <div class="attributes">
+                    <div class="attribute-item">
+                        <span class="attribute-label">地区类型</span>
+                        <span class="attribute-value">西安高新，新材料技术</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">认定年份</span>
+                        <span class="attribute-value">(2023) 年认定的高新</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">企业规模</span>
+                        <span class="attribute-value">小规模</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">23年营收</span>
+                        <span class="attribute-value highlight">24万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">24年营收</span>
+                        <span class="attribute-value highlight">13万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">25年营收</span>
+                        <span class="attribute-value highlight">26万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">知识产权</span>
+                        <span class="attribute-value">软件著作权1个</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">补贴状态</span>
+                        <span class="attribute-value">补贴部分领取</span>
+                    </div>
+                </div>
+                <button class="contact-btn" onclick="contact('GX014')">立即咨询</button>
+            </div>
+
+            <!-- 公司15 -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">⚙️</div>
+                    <div class="company-title">
+                        <div class="company-name">天津XX智能装备公司</div>
+                        <div class="company-id">编号：GX015</div>
+                    </div>
+                    <div class="price-tag">13万</div>
+                </div>
+                <span class="status-badge">● 可用</span>
+                <div class="attributes">
+                    <div class="attribute-item">
+                        <span class="attribute-label">地区类型</span>
+                        <span class="attribute-value">天津高新，智能装备</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">认定年份</span>
+                        <span class="attribute-value">(2024) 年认定的高新</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">企业规模</span>
+                        <span class="attribute-value">小规模</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">23年营收</span>
+                        <span class="attribute-value highlight">20万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">24年营收</span>
+                        <span class="attribute-value highlight">11万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">25年营收</span>
+                        <span class="attribute-value highlight">22万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">知识产权</span>
+                        <span class="attribute-value">软件著作权1个</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">补贴状态</span>
+                        <span class="attribute-value">补贴未领取</span>
+                    </div>
+                </div>
+                <button class="contact-btn" onclick="contact('GX015')">立即咨询</button>
+            </div>
+
+            <!-- 公司16 -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">☁️</div>
+                    <div class="company-title">
+                        <div class="company-name">重庆XX云计算公司</div>
+                        <div class="company-id">编号：GX016</div>
+                    </div>
+                    <div class="price-tag">15万</div>
+                </div>
+                <span class="status-badge">● 可用</span>
+                <div class="attributes">
+                    <div class="attribute-item">
+                        <span class="attribute-label">地区类型</span>
+                        <span class="attribute-value">重庆高新，云计算技术</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">认定年份</span>
+                        <span class="attribute-value">(2024) 年认定的高新</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">企业规模</span>
+                        <span class="attribute-value">小规模</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">23年营收</span>
+                        <span class="attribute-value highlight">27万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">24年营收</span>
+                        <span class="attribute-value highlight">17万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">25年营收</span>
+                        <span class="attribute-value highlight">33万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">知识产权</span>
+                        <span class="attribute-value">软件著作权2个</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">补贴状态</span>
+                        <span class="attribute-value">补贴未领取</span>
+                    </div>
+                </div>
+                <button class="contact-btn" onclick="contact('GX016')">立即咨询</button>
+            </div>
+
+            <!-- 公司17 -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">🔧</div>
+                    <div class="company-title">
+                        <div class="company-name">苏州XX自动化公司</div>
+                        <div class="company-id">编号：GX017</div>
+                    </div>
+                    <div class="price-tag">14万</div>
+                </div>
+                <span class="status-badge">● 可用</span>
+                <div class="attributes">
+                    <div class="attribute-item">
+                        <span class="attribute-label">地区类型</span>
+                        <span class="attribute-value">苏州高新，自动化技术</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">认定年份</span>
+                        <span class="attribute-value">(2023) 年认定的高新</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">企业规模</span>
+                        <span class="attribute-value">小规模</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">23年营收</span>
+                        <span class="attribute-value highlight">23万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">24年营收</span>
+                        <span class="attribute-value highlight">12万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">25年营收</span>
+                        <span class="attribute-value highlight">24万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">知识产权</span>
+                        <span class="attribute-value">软件著作权1个</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">补贴状态</span>
+                        <span class="attribute-value">补贴部分领取</span>
+                    </div>
+                </div>
+                <button class="contact-btn" onclick="contact('GX017')">立即咨询</button>
+            </div>
+
+            <!-- 公司18 -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">🏥</div>
+                    <div class="company-title">
+                        <div class="company-name">长沙XX医疗科技公司</div>
+                        <div class="company-id">编号：GX018</div>
+                    </div>
+                    <div class="price-tag">13万</div>
+                </div>
+                <span class="status-badge">● 可用</span>
+                <div class="attributes">
+                    <div class="attribute-item">
+                        <span class="attribute-label">地区类型</span>
+                        <span class="attribute-value">长沙高新，医疗技术</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">认定年份</span>
+                        <span class="attribute-value">(2024) 年认定的高新</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">企业规模</span>
+                        <span class="attribute-value">小规模</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">23年营收</span>
+                        <span class="attribute-value highlight">21万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">24年营收</span>
+                        <span class="attribute-value highlight">10万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">25年营收</span>
+                        <span class="attribute-value highlight">23万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">知识产权</span>
+                        <span class="attribute-value">软件著作权1个</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">补贴状态</span>
+                        <span class="attribute-value">补贴未领取</span>
+                    </div>
+                </div>
+                <button class="contact-btn" onclick="contact('GX018')">立即咨询</button>
+            </div>
+
+            <!-- 公司19 -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">🌊</div>
+                    <div class="company-title">
+                        <div class="company-name">青岛XX海洋科技公司</div>
+                        <div class="company-id">编号：GX019</div>
+                    </div>
+                    <div class="price-tag">15万</div>
+                </div>
+                <span class="status-badge">● 可用</span>
+                <div class="attributes">
+                    <div class="attribute-item">
+                        <span class="attribute-label">地区类型</span>
+                        <span class="attribute-value">青岛高新，海洋技术</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">认定年份</span>
+                        <span class="attribute-value">(2024) 年认定的高新</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">企业规模</span>
+                        <span class="attribute-value">小规模</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">23年营收</span>
+                        <span class="attribute-value highlight">29万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">24年营收</span>
+                        <span class="attribute-value highlight">18万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">25年营收</span>
+                        <span class="attribute-value highlight">31万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">知识产权</span>
+                        <span class="attribute-value">软件著作权2个</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">补贴状态</span>
+                        <span class="attribute-value">补贴未领取</span>
+                    </div>
+                </div>
+                <button class="contact-btn" onclick="contact('GX019')">立即咨询</button>
+            </div>
+
+            <!-- 公司20 -->
+            <div class="company-card">
+                <div class="company-header">
+                    <div class="company-icon">♻️</div>
+                    <div class="company-title">
+                        <div class="company-name">厦门XX节能技术公司</div>
+                        <div class="company-id">编号：GX020</div>
+                    </div>
+                    <div class="price-tag">14万</div>
+                </div>
+                <span class="status-badge">● 可用</span>
+                <div class="attributes">
+                    <div class="attribute-item">
+                        <span class="attribute-label">地区类型</span>
+                        <span class="attribute-value">厦门高新，节能技术</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">认定年份</span>
+                        <span class="attribute-value">(2023) 年认定的高新</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">企业规模</span>
+                        <span class="attribute-value">小规模</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">23年营收</span>
+                        <span class="attribute-value highlight">25万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">24年营收</span>
+                        <span class="attribute-value highlight">15万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">25年营收</span>
+                        <span class="attribute-value highlight">27万</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">知识产权</span>
+                        <span class="attribute-value">软件著作权2个</span>
+                    </div>
+                    <div class="attribute-item">
+                        <span class="attribute-label">补贴状态</span>
+                        <span class="attribute-value">补贴部分领取</span>
+                    </div>
+                </div>
+                <button class="contact-btn" onclick="contact('GX020')">立即咨询</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function contact(companyId) {
+            alert('咨询微信：18917875149\n\n公司编号：' + companyId);
+        }
+    </script>
+</body>
+</html>
