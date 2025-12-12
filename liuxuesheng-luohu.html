@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留学生高新落户指南</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+```
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+        line-height: 1.6;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .header {
+        background: white;
+        border-radius: 16px;
+        padding: 40px 30px;
+        margin-bottom: 24px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        text-align: center;
+    }
+
+    .header-icon {
+        font-size: 64px;
+        margin-bottom: 16px;
+    }
+
+    h1 {
+        font-size: 32px;
+        color: #2d3748;
+        font-weight: 700;
+        margin-bottom: 12px;
+    }
+
+    .subtitle {
+        font-size: 16px;
+        color: #718096;
+    }
+
+    .section {
+        background: white;
+        border-radius: 16px;
+        padding: 30px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .section-title {
+        font-size: 24px;
+        color: #2d3748;
+        font-weight: 600;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 3px solid #667eea;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .section-icon {
+        font-size: 28px;
+    }
+
+    .materials-grid {
+        display: grid;
+        gap: 16px;
+    }
+
+    .material-item {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 12px;
+        border-left: 4px solid #667eea;
+        transition: all 0.3s;
+    }
+
+    .material-item:hover {
+        transform: translateX(5px);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+    }
+
+    .material-name {
+        font-size: 18px;
+        font-weight: 600;
+        color: #2d3748;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .material-icon {
+        font-size: 22px;
+    }
+
+    .material-desc {
+        font-size: 14px;
+        color: #718096;
+        margin-top: 8px;
+    }
+
+    .required-badge {
+        display: inline-block;
+        background: #e53e3e;
+        color: white;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    .optional-badge {
+        display: inline-block;
+        background: #38a169;
+        color: white;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    .notes-list {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .notes-list li {
+        padding: 12px 0;
+        color: #2d3748;
+        font-size: 15px;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .notes-list li::before {
+        content: "✓";
+        color: #667eea;
+        font-weight: bold;
+        font-size: 18px;
+        flex-shrink: 0;
+    }
+
+    .process-steps {
+        display: grid;
+        gap: 16px;
+    }
+
+    .step-item {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+    }
+
+    .step-number {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 18px;
+        flex-shrink: 0;
+    }
+
+    .step-content {
+        flex: 1;
+        padding-top: 8px;
+    }
+
+    .step-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #2d3748;
+        margin-bottom: 4px;
+    }
+
+    .step-desc {
+        font-size: 14px;
+        color: #718096;
+    }
+
+    .contact-box {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px;
+        border-radius: 16px;
+        text-align: center;
+    }
+
+    .contact-title {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 16px;
+    }
+
+    .contact-info {
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 12px;
+        letter-spacing: 2px;
+    }
+
+    .contact-desc {
+        font-size: 14px;
+        opacity: 0.9;
+    }
+
+    .highlight-box {
+        background: #fff5e6;
+        border-left: 4px solid #ff9800;
+        padding: 16px;
+        border-radius: 8px;
+        margin: 16px 0;
+    }
+
+    .highlight-title {
+        font-weight: 600;
+        color: #f57c00;
+        margin-bottom: 8px;
+    }
+
+    .highlight-content {
+        color: #5d4037;
+        font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+        body {
+            padding: 10px;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        .header {
+            padding: 30px 20px;
+        }
+
+        .section {
+            padding: 20px;
+        }
+
+        .section-title {
+            font-size: 20px;
+        }
+    }
+</style>
+```
+
+</head>
+<body>
+    <div class="container">
+        <!-- 页面头部 -->
+        <div class="header">
+            <div class="header-icon">🎓</div>
+            <h1>留学生高新落户指南</h1>
+            <p class="subtitle">海外人才 · 高新认证 · 快速落户</p>
+        </div>
+
+```
+    <!-- 所需资料 -->
+    <div class="section">
+        <div class="section-title">
+            <span class="section-icon">📋</span>
+            所需资料清单
+        </div>
+        <div class="materials-grid">
+            <div class="material-item">
+                <div class="material-name">
+                    <span class="material-icon">📜</span>
+                    毕业证（含成绩单）
+                    <span class="required-badge">必需</span>
+                </div>
+                <div class="material-desc">
+                    国外院校颁发的学位证书及完整成绩单，需提供原件及复印件
+                </div>
+            </div>
+
+            <div class="material-item">
+                <div class="material-name">
+                    <span class="material-icon">✅</span>
+                    留服认证
+                    <span class="required-badge">必需</span>
+                </div>
+                <div class="material-desc">
+                    教育部留学服务中心出具的《国外学历学位认证书》
+                </div>
+            </div>
+
+            <div class="material-item">
+                <div class="material-name">
+                    <span class="material-icon">🪪</span>
+                    身份证
+                    <span class="required-badge">必需</span>
+                </div>
+                <div class="material-desc">
+                    本人有效身份证原件及复印件
+                </div>
+            </div>
+
+            <div class="material-item">
+                <div class="material-name">
+                    <span class="material-icon">📒</span>
+                    户口本
+                    <span class="required-badge">必需</span>
+                </div>
+                <div class="material-desc">
+                    户口本首页及本人页，需提供原件及复印件
+                </div>
+            </div>
+
+            <div class="material-item">
+                <div class="material-name">
+                    <span class="material-icon">💍</span>
+                    结婚证
+                    <span class="optional-badge">已婚提供</span>
+                </div>
+                <div class="material-desc">
+                    如已婚，需提供结婚证原件及复印件
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 办理流程 -->
+    <div class="section">
+        <div class="section-title">
+            <span class="section-icon">🔄</span>
+            办理流程
+        </div>
+        <div class="process-steps">
+            <div class="step-item">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <div class="step-title">准备材料</div>
+                    <div class="step-desc">按照清单准备所有必需材料，确保齐全有效</div>
+                </div>
+            </div>
+
+            <div class="step-item">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <div class="step-title">提交申请</div>
+                    <div class="step-desc">联系我们提交材料，进行初步审核</div>
+                </div>
+            </div>
+
+            <div class="step-item">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <div class="step-title">资料审核</div>
+                    <div class="step-desc">相关部门审核材料，确认符合落户条件</div>
+                </div>
+            </div>
+
+            <div class="step-item">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <div class="step-title">办理落户</div>
+                    <div class="step-desc">审核通过后，办理正式落户手续</div>
+                </div>
+            </div>
+
+            <div class="step-item">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <div class="step-title">完成落户</div>
+                    <div class="step-desc">领取新户口本，落户完成</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 重要提示 -->
+    <div class="section">
+        <div class="section-title">
+            <span class="section-icon">⚠️</span>
+            重要提示
+        </div>
+        <ul class="notes-list">
+            <li>所有材料需提供原件及复印件，复印件需加盖公章</li>
+            <li>留服认证需提前在教育部留学服务中心官网申请办理</li>
+            <li>材料需真实有效，如有虚假将影响落户申请</li>
+            <li>建议提前咨询，确认最新政策和要求</li>
+            <li>办理周期因地区政策不同而有所差异</li>
+        </ul>
+
+        <div class="highlight-box">
+            <div class="highlight-title">📌 温馨提示</div>
+            <div class="highlight-content">
+                留学生落户政策可能因地区和时间有所调整，建议咨询最新政策后再准备材料。我们提供专业的咨询和代办服务，帮助您快速完成落户。
+            </div>
+        </div>
+    </div>
+
+    <!-- 联系方式 -->
+    <div class="contact-box">
+        <div class="contact-title">💬 咨询与办理</div>
+        <div class="contact-info">18917875149</div>
+        <div class="contact-desc">微信同号 · 专业顾问一对一服务</div>
+    </div>
+</div>
+```
+
+</body>
+</html>
