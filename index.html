@@ -1,1 +1,651 @@
+<!DOCTYPE html>
 
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高新企业资源库</title>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+```
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+        background: #f5f5f5;
+        padding: 20px;
+        line-height: 1.6;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding: 20px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .header h1 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 8px;
+    }
+
+    .header p {
+        color: #666;
+        font-size: 14px;
+    }
+
+    .company-item {
+        background: white;
+        padding: 20px;
+        margin-bottom: 16px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        transition: all 0.3s;
+        position: relative;
+    }
+
+    .company-item:hover {
+        box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+        transform: translateY(-2px);
+    }
+
+    .company-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 12px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #f0f0f0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .title-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .company-number {
+        display: inline-block;
+        background: #007aff;
+        color: white;
+        padding: 2px 10px;
+        border-radius: 12px;
+        font-size: 13px;
+        font-weight: normal;
+    }
+
+    .status-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 13px;
+    }
+
+    .status-available {
+        background: #e8f5e9;
+        color: #2e7d32;
+    }
+
+    .price-tag {
+        font-size: 20px;
+        font-weight: 700;
+        color: #ff6b00;
+        margin-left: auto;
+    }
+
+    .info-list {
+        list-style: none;
+    }
+
+    .info-list li {
+        padding: 8px 0;
+        color: #333;
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    .info-list li::before {
+        content: attr(data-index) "、";
+        color: #666;
+        font-weight: 500;
+    }
+
+    .highlight {
+        color: #007aff;
+        font-weight: 500;
+    }
+
+    .contact-btn {
+        display: inline-block;
+        margin-top: 12px;
+        padding: 8px 20px;
+        background: #007aff;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.2s;
+    }
+
+    .contact-btn:hover {
+        background: #0051d5;
+    }
+
+    @media (max-width: 600px) {
+        body {
+            padding: 10px;
+        }
+
+        .company-item {
+            padding: 16px;
+        }
+
+        .price-tag {
+            font-size: 18px;
+            width: 100%;
+            text-align: right;
+            margin-top: 8px;
+        }
+    }
+</style>
+
+```
+
+</head>
+<body>
+<div class="container">
+<div class="header">
+<h1>🏢 高新企业资源库</h1>
+<p>共20家优质高新技术企业壳公司</p>
+</div>
+
+```
+    <!-- 公司1 - 指定的产品 -->
+    <div class="company-item">
+        <div class="company-title">
+            <div class="title-left">
+                上海XX智能科技有限公司
+                <span class="company-number">编号01</span>
+                <span class="status-badge status-available">可用</span>
+            </div>
+            <span class="price-tag">32万</span>
+        </div>
+        <ul class="info-list">
+            <li data-index="1">上海高新，技术类</li>
+            <li data-index="2">(2024) 年认定的高新</li>
+            <li data-index="3">小规模</li>
+            <li data-index="4">23年营收 <span class="highlight">30万</span></li>
+            <li data-index="5">24年营收 <span class="highlight">10万</span></li>
+            <li data-index="6">25年营收 <span class="highlight">35万</span></li>
+            <li data-index="7">知识产权：著作权权</li>
+            <li data-index="8">补贴未领取</li>
+        </ul>
+        <button class="contact-btn" onclick="contact('01')">立即咨询</button>
+    </div>
+
+    <!-- 公司2 -->
+    <div class="company-item">
+        <div class="company-title">
+            <div class="title-left">
+                上海XX新能源技术公司
+                <span class="company-number">编号02</span>
+                <span class="status-badge status-available">可用</span>
+            </div>
+            <span class="price-tag">68万</span>
+        </div>
+        <ul class="info-list">
+            <li data-index="1">上海高新，技术类</li>
+            <li data-index="2">(2024) 年认定的高新</li>
+            <li data-index="3">一般纳税人</li>
+            <li data-index="4">23年营收 <span class="highlight">80万</span></li>
+            <li data-index="5">24年营收 <span class="highlight">50万</span></li>
+            <li data-index="6">25年营收 <span class="highlight">90万</span></li>
+            <li data-index="7">知识产权：软件著作权5个</li>
+            <li data-index="8">补贴未领取</li>
+        </ul>
+        <button class="contact-btn" onclick="contact('02')">立即咨询</button>
+    </div>
+
+    <!-- 公司3 -->
+    <div class="company-item">
+        <div class="company-title">
+            <div class="title-left">
+                上海XX生物科技有限公司
+                <span class="company-number">编号03</span>
+                <span class="status-badge status-available">可用</span>
+            </div>
+            <span class="price-tag">55万</span>
+        </div>
+        <ul class="info-list">
+            <li data-index="1">上海高新，生物技术类</li>
+            <li data-index="2">(2023) 年认定的高新</li>
+            <li data-index="3">小规模</li>
+            <li data-index="4">23年营收 <span class="highlight">45万</span></li>
+            <li data-index="5">24年营收 <span class="highlight">25万</span></li>
+            <li data-index="6">25年营收 <span class="highlight">60万</span></li>
+            <li data-index="7">知识产权：软件著作权3个</li>
+            <li data-index="8">补贴部分领取</li>
+        </ul>
+        <button class="contact-btn" onclick="contact('03')">立即咨询</button>
+    </div>
+
+    <!-- 公司4 -->
+    <div class="company-item">
+        <div class="company-title">
+            <div class="title-left">
+                上海XX人工智能公司
+                <span class="company-number">编号04</span>
+                <span class="status-badge status-available">可用</span>
+            </div>
+            <span class="price-tag">70万</span>
+        </div>
+        <ul class="info-list">
+            <li data-index="1">上海高新，人工智能</li>
+            <li data-index="2">(2024) 年认定的高新</li>
+            <li data-index="3">一般纳税人</li>
+            <li data-index="4">23年营收 <span class="highlight">100万</span></li>
+            <li data-index="5">24年营收 <span class="highlight">70万</span></li>
+            <li data-index="6">25年营收 <span class="highlight">120万</span></li>
+            <li data-index="7">知识产权：发明专利1个，软著6个</li>
+            <li data-index="8">补贴未领取</li>
+        </ul>
+        <button class="contact-btn" onclick="contact('04')">立即咨询</button>
+    </div>
+
+    <!-- 公司5 -->
+    <div class="company-item">
+        <div class="company-title">
+            <div class="title-left">
+                深圳XX物联网科技公司
+                <span class="company-number">编号05</span>
+                <span class="status-badge status-available">可用</span>
+            </div>
+            <span class="price-tag">62万</span>
+        </div>
+        <ul class="info-list">
+            <li data-index="1">深圳高新，物联网技术</li>
+            <li data-index="2">(2024) 年认定的高新</li>
+            <li data-index="3">一般纳税人</li>
+            <li data-index="4">23年营收 <span class="highlight">75万</span></li>
+            <li data-index="5">24年营收 <span class="highlight">40万</span></li>
+            <li data-index="6">25年营收 <span class="highlight">85万</span></li>
+            <li data-index="7">知识产权：软件著作权4个</li>
+            <li data-index="8">补贴未领取</li>
+        </ul>
+        <button class="contact-btn" onclick="contact('05')">立即咨询</button>
+    </div>
+
+    <!-- 公司6 -->
+    <div class="company-item">
+        <div class="company-title">
+            <div class="title-left">
+                深圳XX电子科技公司
+                <span class="company-number">编号06</span>
+                <span class="status-badge status-available">可用</span>
+            </div>
+            <span class="price-tag">58万</span>
+        </div>
+        <ul class="info-list">
+            <li data-index="1">深圳高新，电子技术</li>
+            <li data-index="2">(2024) 年认定的高新</li>
+            <li data-index="3">一般纳税人</li>
+            <li data-index="4">23年营收 <span class="highlight">60万</span></li>
+            <li data-index="5">24年营收 <span class="highlight">35万</span></li>
+            <li data-index="6">25年营收 <span class="highlight">70万</span></li>
+            <li data-index="7">知识产权：软件著作权3个</li>
+            <li data-index="8">补贴未领取</li>
+        </ul>
+        <button class="contact-btn" onclick="contact('06')">立即咨询</button>
+    </div>
+
+    <!-- 公司7 -->
+    <div class="company-item">
+        <div class="company-title">
+            <div class="title-left">
+                深圳XX通信技术公司
+                <span class="company-number">编号07</span>
+                <span class="status-badge status-available">可用</span>
+            </div>
+            <span class="price-tag">54万</span>
+        </div>
+        <ul class="info-list">
+            <li data-index="1">深圳高新，通信技术</li>
+            <li data-index="2">(2023) 年认定的高新</li>
+            <li data-index="3">小规模</li>
+            <li data-index="4">23年营收 <span class="highlight">50万</span></li>
+            <li data-index="5">24年营收 <span class="highlight">30万</span></li>
+            <li data-index="6">25年营收 <span class="highlight">55万</span></li>
+            <li data-index="7">知识产权：软件著作权2个</li>
+            <li data-index="8">补贴部分领取</li>
+        </ul>
+        <button class="contact-btn" onclick="contact('07')">立即咨询</button>
+    </div>
+
+    <!-- 公司8 -->
+    <div class="company-item">
+        <div class="company-title">
+            <div class="title-left">
+                北京XX数据科技公司
+                <span class="company-number">编号08</span>
+                <span class="status-badge status-available">可用</span>
+            </div>
+            <span class="price-tag">14万</span>
+        </div>
+        <ul class="info-list">
+            <li data-index="1">北京高新，大数据技术</li>
+            <li data-index="2">(2024) 年认定的高新</li>
+            <li data-index="3">小规模</li>
+            <li data-index="4">23年营收 <span class="highlight">25万</span></li>
+            <li data-index="5">24年营收 <span class="highlight">15万</span></li>
+            <li data-index="6">25年营收 <span class="highlight">30万</span></li>
+            <li data-index="7">知识产权：软件著作权2个</li>
+            <li data-index="8">补贴未领取</li>
+        </ul>
+        <button class="contact-btn" onclick="contact('08')">立即咨询</button>
+    </div>
+
+    <!-- 公司9 -->
+    <div class="company-item">
+        <div class="company-title">
+            <div class="title-left">
+                杭州XX网络科技公司
+                <span class="company-number">编号09</span>
+                <span class="status-badge status-available">可用</span>
+            </div>
+            <span class="price-tag">13万</span>
+        </div>
+        <ul class="info-list">
+            <li data-index="1">杭州高新，网络技术</li>
+            <li data-index="2">(2024) 年认定的高新</li>
+            <li data-index="3">小规模</li>
+            <li data-index="4">23年营收 <span class="highlight">20万</span></li>
+            <li data-index="5">24年营收 <span class="highlight">12万</span></li>
+            <li data-index="6">25年营收 <span class="highlight">25万</span></li>
+            <li data-index="7">知识产权：软件著作权1个</li>
+            <li data-index="8">补贴未领取</li>
+        </ul>
+        <button class="contact-btn" onclick="contact('09')">立即咨询</button>
+    </div>
+
+    <!-- 公司10 -->
+    <div class="company-item">
+        <div class="company-title">
+            <div class="title-left">
+                广州XX环保科技公司
+                <span class="company-number">编号10</span>
+                <span class="status-badge status-available">可用</span>
+            </div>
+            <span class="price-tag">15万</span>
+        </div>
+        <ul class="info-list">
+            <li data-index="1">广州高新，环保技术</li>
+            <li data-index="2">(2024) 年认定的高新</li>
+            <li data-index="3">小规模</li>
+            <li data-index="4">23年营收 <span class="highlight">28万</span></li>
+            <li data-index="5">24年营收 <span class="highlight">18万</span></li>
+            <li data-index="6">25年营收 <span class="highlight">32万</span></li>
+            <li data-index="7">知识产权：软件著作权2个</li>
+            <li data-index="8">补贴未领取</li>
+        </ul>
+        <button class="contact-btn" onclick="contact('10')">立即咨询</button>
+    </div>
+
+    <!-- 公司11 -->
+    <div class="company-item">
+        <div class="company-title">
+            <div class="title-left">
+                成都XX软件开发公司
+                <span class="company-number">编号11</span>
+                <span class="status-badge status-available">可用</span>
+            </div>
+            <span class="price-tag">13万</span>
+        </div>
+        <ul class="info-list">
+            <li data-index="1">成都高新，软件技术</li>
+            <li data-index="2">(2023) 年认定的高新</li>
+            <li data-index="3">小规模</li>
+            <li data-index="4">23年营收 <span class="highlight">22万</span></li>
+            <li data-index="5">24年营收 <span class="highlight">10万</span></li>
+            <li data-index="6">25年营收 <span class="highlight">20万</span></li>
+            <li data-index="7">知识产权：软件著作权1个</li>
+            <li data-index="8">补贴部分领取</li>
+        </ul>
+        <button class="contact-btn" onclick="contact('11')">立即咨询</button>
+    </div>
+
+    <!-- 公司12 -->
+    <div class="company-item">
+        <div class="company-title">
+            <div class="title-left">
+                武汉XX光电科技公司
+                <span class="company-number">编号12</span>
+                <span class="status-badge status-available">可用</span>
+            </div>
+            <span class="price-tag">14万</span>
+        </div>
+        <ul class="info-list">
+            <li data-index="1">武汉高新，光电技术</li>
+            <li data-index="2">(2024) 年认定的高新</li>
+            <li data-index="3">小规模</li>
+            <li data-index="4">23年营收 <span class="highlight">26万</span></li>
+            <li data-index="5">24年营收 <span class="highlight">14万</span></li>
+            <li data-index="6">25年营收 <span class="highlight">28万</span></li>
+            <li data-index="7">知识产权：软件著作权2个</li>
+            <li data-index="8">补贴未领取</li>
+        </ul>
+        <button class="contact-btn" onclick="contact('12')">立即咨询</button>
+    </div>
+
+    <!-- 公司13 -->
+    <div class="company-item">
+        <div class="company-title">
+            <div class="title-left">
+                南京XX信息技术公司
+                <span class="company-number">编号13</span>
+                <span class="status-badge status-available">可用</span>
+            </div>
+            <span class="price-tag">15万</span>
+        </div>
+        <ul class="info-list">
+            <li data-index="1">南京高新，信息技术</li>
+            <li data-index="2">(2024) 年认定的高新</li>
+            <li data-index="3">小规模</li>
+            <li data-index="4">23年营收 <span class="highlight">30万</span></li>
+            <li data-index="5">24年营收 <span class="highlight">16万</span></li>
+            <li data-index="6">25年营收 <span class="highlight">35万</span></li>
+            <li data-index="7">知识产权：软件著作权3个</li>
+            <li data-index="8">补贴未领取</li>
+        </ul>
+        <button class="contact-btn" onclick="contact('13')">立即咨询</button>
+    </div>
+
+    <!-- 公司14 -->
+    <div class="company-item">
+        <div class="company-title">
+            <div class="title-left">
+                西安XX新材料公司
+                <span class="company-number">编号14</span>
+                <span class="status-badge status-available">可用</span>
+            </div>
+            <span class="price-tag">14万</span>
+        </div>
+        <ul class="info-list">
+            <li data-index="1">西安高新，新材料技术</li>
+            <li data-index="2">(2023) 年认定的高新</li>
+            <li data-index="3">小规模</li>
+            <li data-index="4">23年营收 <span class="highlight">24万</span></li>
+            <li data-index="5">24年营收 <span class="highlight">13万</span></li>
+            <li data-index="6">25年营收 <span class="highlight">26万</span></li>
+            <li data-index="7">知识产权：软件著作权1个</li>
+            <li data-index="8">补贴部分领取</li>
+        </ul>
+        <button class="contact-btn" onclick="contact('14')">立即咨询</button>
+    </div>
+
+    <!-- 公司15 -->
+    <div class="company-item">
+        <div class="company-title">
+            <div class="title-left">
+                天津XX智能装备公司
+                <span class="company-number">编号15</span>
+                <span class="status-badge status-available">可用</span>
+            </div>
+            <span class="price-tag">13万</span>
+        </div>
+        <ul class="info-list">
+            <li data-index="1">天津高新，智能装备</li>
+            <li data-index="2">(2024) 年认定的高新</li>
+            <li data-index="3">小规模</li>
+            <li data-index="4">23年营收 <span class="highlight">20万</span></li>
+            <li data-index="5">24年营收 <span class="highlight">11万</span></li>
+            <li data-index="6">25年营收 <span class="highlight">22万</span></li>
+            <li data-index="7">知识产权：软件著作权1个</li>
+            <li data-index="8">补贴未领取</li>
+        </ul>
+        <button class="contact-btn" onclick="contact('15')">立即咨询</button>
+    </div>
+
+    <!-- 公司16 -->
+    <div class="company-item">
+        <div class="company-title">
+            <div class="title-left">
+                重庆XX云计算公司
+                <span class="company-number">编号16</span>
+                <span class="status-badge status-available">可用</span>
+            </div>
+            <span class="price-tag">15万</span>
+        </div>
+        <ul class="info-list">
+            <li data-index="1">重庆高新，云计算技术</li>
+            <li data-index="2">(2024) 年认定的高新</li>
+            <li data-index="3">小规模</li>
+            <li data-index="4">23年营收 <span class="highlight">27万</span></li>
+            <li data-index="5">24年营收 <span class="highlight">17万</span></li>
+            <li data-index="6">25年营收 <span class="highlight">33万</span></li>
+            <li data-index="7">知识产权：软件著作权2个</li>
+            <li data-index="8">补贴未领取</li>
+        </ul>
+        <button class="contact-btn" onclick="contact('16')">立即咨询</button>
+    </div>
+
+    <!-- 公司17 -->
+    <div class="company-item">
+        <div class="company-title">
+            <div class="title-left">
+                苏州XX自动化公司
+                <span class="company-number">编号17</span>
+                <span class="status-badge status-available">可用</span>
+            </div>
+            <span class="price-tag">14万</span>
+        </div>
+        <ul class="info-list">
+            <li data-index="1">苏州高新，自动化技术</li>
+            <li data-index="2">(2023) 年认定的高新</li>
+            <li data-index="3">小规模</li>
+            <li data-index="4">23年营收 <span class="highlight">23万</span></li>
+            <li data-index="5">24年营收 <span class="highlight">12万</span></li>
+            <li data-index="6">25年营收 <span class="highlight">24万</span></li>
+            <li data-index="7">知识产权：软件著作权1个</li>
+            <li data-index="8">补贴部分领取</li>
+        </ul>
+        <button class="contact-btn" onclick="contact('17')">立即咨询</button>
+    </div>
+
+    <!-- 公司18 -->
+    <div class="company-item">
+        <div class="company-title">
+            <div class="title-left">
+                长沙XX医疗科技公司
+                <span class="company-number">编号18</span>
+                <span class="status-badge status-available">可用</span>
+            </div>
+            <span class="price-tag">13万</span>
+        </div>
+        <ul class="info-list">
+            <li data-index="1">长沙高新，医疗技术</li>
+            <li data-index="2">(2024) 年认定的高新</li>
+            <li data-index="3">小规模</li>
+            <li data-index="4">23年营收 <span class="highlight">21万</span></li>
+            <li data-index="5">24年营收 <span class="highlight">10万</span></li>
+            <li data-index="6">25年营收 <span class="highlight">23万</span></li>
+            <li data-index="7">知识产权：软件著作权1个</li>
+            <li data-index="8">补贴未领取</li>
+        </ul>
+        <button class="contact-btn" onclick="contact('18')">立即咨询</button>
+    </div>
+
+    <!-- 公司19 -->
+    <div class="company-item">
+        <div class="company-title">
+            <div class="title-left">
+                青岛XX海洋科技公司
+                <span class="company-number">编号19</span>
+                <span class="status-badge status-available">可用</span>
+            </div>
+            <span class="price-tag">15万</span>
+        </div>
+        <ul class="info-list">
+            <li data-index="1">青岛高新，海洋技术</li>
+            <li data-index="2">(2024) 年认定的高新</li>
+            <li data-index="3">小规模</li>
+            <li data-index="4">23年营收 <span class="highlight">29万</span></li>
+            <li data-index="5">24年营收 <span class="highlight">18万</span></li>
+            <li data-index="6">25年营收 <span class="highlight">31万</span></li>
+            <li data-index="7">知识产权：软件著作权2个</li>
+            <li data-index="8">补贴未领取</li>
+        </ul>
+        <button class="contact-btn" onclick="contact('19')">立即咨询</button>
+    </div>
+
+    <!-- 公司20 -->
+    <div class="company-item">
+        <div class="company-title">
+            <div class="title-left">
+                厦门XX节能技术公司
+                <span class="company-number">编号20</span>
+                <span class="status-badge status-available">可用</span>
+            </div>
+            <span class="price-tag">14万</span>
+        </div>
+        <ul class="info-list">
+            <li data-index="1">厦门高新，节能技术</li>
+            <li data-index="2">(2023) 年认定的高新</li>
+            <li data-index="3">小规模</li>
+            <li data-index="4">23年营收 <span class="highlight">25万</span></li>
+            <li data-index="5">24年营收 <span class="highlight">15万</span></li>
+            <li data-index="6">25年营收 <span class="highlight">27万</span></li>
+            <li data-index="7">知识产权：软件著作权2个</li>
+            <li data-index="8">补贴部分领取</li>
+        </ul>
+        <button class="contact-btn" onclick="contact('20')">立即咨询</button>
+    </div>
+
+</div>
+
+<script>
+    function contact(number) {
+        alert('咨询微信：18917875149\\n\\n公司编号：' + number);
+    }
+</script>
+
+```
+
+</body>
+</html>
