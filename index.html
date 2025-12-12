@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -10,52 +9,82 @@
             margin: 0;
             padding: 0;
             font-family: Arial, "Microsoft YaHei", sans-serif;
+            background: #667eea;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            padding: 20px;
         }
 
-```
-    .container {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 50px 20px;
-        text-align: center;
-    }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding-top: 40px;
+        }
 
-    h1 {
-        color: white;
-        font-size: 40px;
-        margin-bottom: 60px;
-    }
+        h1 {
+            color: white;
+            font-size: 36px;
+            text-align: center;
+            margin: 0 0 50px 0;
+            padding: 0;
+            font-weight: bold;
+        }
 
-    a {
-        display: block;
-        background: white;
-        padding: 30px;
-        margin-bottom: 20px;
-        border-radius: 12px;
-        text-decoration: none;
-        color: #333;
-        font-size: 22px;
-    }
+        .link-box {
+            background: white;
+            padding: 25px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            text-align: left;
+        }
 
-    a:hover {
-        background: #f0f0f0;
-    }
-</style>
-```
+        .link-box a {
+            text-decoration: none;
+            color: #333;
+            font-size: 20px;
+            display: block;
+        }
 
+        .link-box:hover {
+            background: #f5f5f5;
+        }
+
+        .icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 28px;
+            }
+            .link-box a {
+                font-size: 18px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>上海创业服务</h1>
-
-```
-    <a href="gaoxin-ziyuan.html">🚀 高新资源</a>
-    <a href="gaoxin-zhuanrang.html">📋 高新转让指南</a>
-    <a href="liuxuesheng-luohu.html">🎓 留学生高新落户指南</a>
-</div>
-```
-
+        
+        <div class="link-box">
+            <a href="gaoxin-ziyuan.html">
+                <span class="icon">🚀</span>高新资源
+            </a>
+        </div>
+        
+        <div class="link-box">
+            <a href="gaoxin-zhuanrang.html">
+                <span class="icon">📋</span>高新转让指南
+            </a>
+        </div>
+        
+        <div class="link-box">
+            <a href="liuxuesheng-luohu.html">
+                <span class="icon">🎓</span>留学生高新落户指南
+            </a>
+        </div>
+    </div>
 </body>
 </html>
