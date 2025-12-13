@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>内容</title>
+  <style>
+    body{
+      font-family: system-ui,-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",Arial,sans-serif;
+      max-width: 720px;
+      margin: 22px auto;
+      padding: 0 16px;
+      line-height: 1.85;
+      font-size: 17px;
+      color:#111;
+    }
+    a{ color:#111; text-decoration: none; }
+    a:hover{ text-decoration: underline; }
+    .topbar{ margin-bottom: 18px; }
+    .topbar a{ color:#666; font-size: 14px; }
+    h1{ font-size: 22px; margin: 8px 0 18px; }
+    h2{ font-size: 18px; margin: 20px 0 10px; }
+    p{ margin: 12px 0; }
+    blockquote{
+      margin: 14px 0;
+      padding: 10px 12px;
+      border-left: 3px solid #ddd;
+      background: #fafafa;
+      color:#333;
+    }
+    .meta{ color:#666; font-size: 14px; margin-bottom: 16px; }
+  </style>
+
+  <!-- 轻量 Markdown 渲染库（CDN） -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <div class="topbar"><a href="./">← 返回目录</a></div>
+  <div id="meta" class="meta"></div>
+  <div id="content">加载中…</div>
+
+  <script>
+    // 读取 ?file=records/xxx.md
+    const params = new URLSearchParams(location.search);
+    const file = params.get('file');
+    const title = params.get('title') || '内容';
+    const date = params.get('date') || '';
+    const type = params.get('type') || '';
+
+    document.title = title;
+    document.getElementById('meta').textContent =
+      [date, type].filter(Boolean).join(' ｜ ');
+
+    if (!file) {
+      document.getElementById('content').textContent = '缺少参数：file';
+    } else {
+      fetch(file)
+        .then(r => r.text())
+        .then(md => {
+          document.getElementById('content').innerHTML = marked.parse(md);
+        })
+        .catch(() => {
+          document.getElementById('content').textContent = '读取失败：' + file;
+        });
+    }
+  </script>
+</body>
+</html>
