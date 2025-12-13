@@ -3,18 +3,66 @@
 <head>
   <meta charset="utf-8">
   <title>判断与案例记录</title>
+
+  <!-- 手机优先 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <style>
-    body { font-family: system-ui, -apple-system, BlinkMacSystemFont;
-           max-width: 720px; margin: 40px auto; line-height: 1.7; }
-    h1 { margin-bottom: 24px; }
-    .item { margin-bottom: 22px; }
-    .meta { color: #666; font-size: 14px; }
-    a { text-decoration: none; color: #000; }
-    a:hover { text-decoration: underline; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "PingFang SC",
+                   "Helvetica Neue", Arial, sans-serif;
+      max-width: 680px;
+      margin: 24px auto;
+      padding: 0 16px;
+      line-height: 1.75;
+      font-size: 17px;
+      color: #111;
+      background: #fff;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 28px;
+      font-weight: 600;
+    }
+
+    .item {
+      margin-bottom: 26px;
+    }
+
+    .item a {
+      text-decoration: none;
+      color: #111;
+      display: inline-block;
+    }
+
+    .item a:hover {
+      text-decoration: underline;
+    }
+
+    .item strong {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .meta {
+      margin-top: 6px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    /* 给内容一点“呼吸感” */
+    .divider {
+      height: 1px;
+      background: #eee;
+      margin: 28px 0;
+    }
   </style>
 </head>
+
 <body>
   <h1>判断与案例记录</h1>
+
   <div id="list"></div>
 
   <script>
@@ -22,14 +70,28 @@
       .then(res => res.json())
       .then(data => {
         const list = document.getElementById('list');
-        data.forEach(item => {
+
+        data.forEach((item, index) => {
           const div = document.createElement('div');
           div.className = 'item';
+
           div.innerHTML = `
-            <a href="${item.file}"><strong>${item.title}</strong></a>
-            <div class="meta">${item.date} ｜ ${item.type}</div>
+            <a href="${item.file}">
+              <strong>${item.title}</strong>
+            </a>
+            <div class="meta">
+              ${item.date} ｜ ${item.type}
+            </div>
           `;
+
           list.appendChild(div);
+
+          // 非最后一条，加分割线
+          if (index !== data.length - 1) {
+            const hr = document.createElement('div');
+            hr.className = 'divider';
+            list.appendChild(hr);
+          }
         });
       });
   </script>
