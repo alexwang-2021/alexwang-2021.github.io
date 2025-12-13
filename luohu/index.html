@@ -76,7 +76,7 @@
           div.className = 'item';
 
           div.innerHTML = `
-            <a href="${item.file}">
+           <a href="post.html?file=${encodeURIComponent(item.file)}&title=${encodeURIComponent(item.title)}&date=${encodeURIComponent(item.date)}&type=${encodeURIComponent(item.type)}">
               <strong>${item.title}</strong>
             </a>
             <div class="meta">
