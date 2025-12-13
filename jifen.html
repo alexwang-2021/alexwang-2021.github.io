@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>上海居住证积分计算</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto;max-width:880px;margin:24px auto;padding:0 14px}
+    h1{font-size:22px;margin:0 0 12px}
+    .card{border:1px solid hsl(0, 0%, 90%);border-radius:12px;padding:14px;margin:12px 0}
+    .group-title{font-weight:700;margin-bottom:10px}
+    .opts{display:grid;grid-template-columns:1fr;gap:8px}
+    label{display:flex;gap:10px;align-items:flex-start;line-height:1.4}
+    input[type="radio"]{margin-top:3px}
+    .row{display:flex;gap:10px;flex-wrap:wrap}
+    button{padding:10px 14px;border:0;border-radius:10px;cursor:pointer;font-size:15px}
+    .result{font-size:18px;line-height:1.7}
+    .muted{color:#666;font-size:13px}
+    .ok{color:#0a7}
+  </style>
+</head>
+<body>
+  <h1>上海居住证积分（四大要素）</h1>
+  <div class="muted">说明：按你图里的 1/2/3/4 做成 4 个单选。选择后点“计算”。</div>
+
+  <!-- 1 年龄 -->
+  <div class="card">
+    <div class="group-title">1）年龄（单选）</div>
+    <div class="opts" id="ageGroup"></div>
+  </div>
+
+  <!-- 2 学历 -->
+  <div class="card">
+    <div class="group-title">2）学历（单选）</div>
+    <div class="opts">
+      <label><input type="radio" name="edu" value="50" checked>大专（50分）</label>
+      <label><input type="radio" name="edu" value="60">本科（60分）</label>
+      <label><input type="radio" name="edu" value="90">本科 + 学位（90分）</label>
+      <label><input type="radio" name="edu" value="100">硕士（100分）</label>
+      <label><input type="radio" name="edu" value="110">博士（110分）</label>
+    </div>
+  </div>
+
+  <!-- 3 职称技能证书 -->
+  <div class="card">
+    <div class="group-title">3）职称 / 技能证书（单选）</div>
+    <div class="opts">
+      <label><input type="radio" name="skill" value="15" checked>技能五级（15分）</label>
+      <label><input type="radio" name="skill" value="30">技能四级（30分）</label>
+      <label><input type="radio" name="skill" value="60">技能三级（60分）</label>
+      <label><input type="radio" name="skill" value="100">技能二级 / 中级职称（100分）</label>
+      <label><input type="radio" name="skill" value="140">技能一级 / 高级职称（140分）</label>
+    </div>
+  </div>
+
+  <!-- 4 社保 -->
+  <div class="card">
+    <div class="group-title">4）社保（单选）</div>
+    <div class="muted">基础：每累计12个月3分；额外分按图中几档（此处做成单选，直接选一档）。</div>
+    <div class="opts">
+      <label><input type="radio" name="ss" value="3" checked>累计 12 个月（3分）</label>
+      <label><input type="radio" name="ss" value="6">累计 24 个月（6分）</label>
+      <label><input type="radio" name="ss" value="9">累计 36 个月（9分）</label>
+      <label><input type="radio" name="ss" value="12">累计 48 个月（12分）</label>
+      <label><input type="radio" name="ss" value="15">累计 60 个月（15分）</label>
+
+      <hr style="border:none;border-top:1px dashed #ddd;margin:6px 0;">
+
+      <label><input type="radio" name="ss" value="25">额外分：4年累计36个月 0.8倍社保（25分）</label>
+      <label><input type="radio" name="ss" value="50">额外分：4年累计36个月 1倍社保（50分）</label>
+      <label><input type="radio" name="ss" value="100">额外分：4年累计36个月 2倍社保（100分）</label>
+      <label><input type="radio" name="ss" value="120">额外分：3年累计24个月 3倍社保（120分）</label>
+    </div>
+  </div>
+
+  <div class="row">
+    <button onclick="calc()">计算总分</button>
+    <button onclick="resetAll()">重置为默认</button>
+  </div>
+
+  <div class="card">
+    <div id="out" class="result">请选择后点击“计算总分”。</div>
+  </div>
+
+  <script>
+    // 按图片规则，把年龄做成“单选档位”
+    const ageOptions = [
+      { text: "43岁及以下（30分）", val: 30 },
+      { text: "44岁（29分）", val: 29 },
+      { text: "45岁（27分）", val: 27 },
+      { text: "46岁（25分）", val: 25 },
+      { text: "47岁（23分）", val: 23 },
+      { text: "48岁（21分）", val: 21 },
+      { text: "49岁（19分）", val: 19 },
+      { text: "50岁（17分）", val: 17 },
+      { text: "51岁（15分）", val: 15 },
+      { text: "52岁（13分）", val: 13 },
+      { text: "53岁（11分）", val: 11 },
+      { text: "54岁（9分）", val: 9 },
+      { text: "55-60周岁（5分）", val: 5 },
+    ];
+
+    // 渲染年龄单选
+    const ageGroup = document.getElementById("ageGroup");
+    ageOptions.forEach((o, i) => {
+      const id = `age_${i}`;
+      const checked = i === 0 ? "checked" : "";
+      ageGroup.insertAdjacentHTML("beforeend", `
+        <label for="${id}">
+          <input id="${id}" type="radio" name="age" value="${o.val}" ${checked}>
+          ${o.text}
+        </label>
+      `);
+    });
+
+    function getRadioVal(name){
+      const el = document.querySelector(`input[name="${name}"]:checked`);
+      return el ? Number(el.value) : 0;
+    }
+
+    function calc(){
+      const age = getRadioVal("age");
+      const edu = getRadioVal("edu");
+      const skill = getRadioVal("skill");
+      const ss = getRadioVal("ss");
+      const total = age + edu + skill + ss;
+
+      document.getElementById("out").innerHTML =
+        `<span class="ok"><b>总分：${total}</b></span><br>` +
+        `年龄：${age} 分<br>` +
+        `学历：${edu} 分<br>` +
+        `职称/技能：${skill} 分<br>` +
+        `社保：${ss} 分`;
+    }
+
+    function resetAll(){
+      document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+      // 设置默认：年龄第一项、学历大专、技能五级、社保12个月
+      document.querySelector('input[name="age"][value="30"]').checked = true;
+      document.querySelector('input[name="edu"][value="50"]').checked = true;
+      document.querySelector('input[name="skill"][value="15"]').checked = true;
+      document.querySelector('input[name="ss"][value="3"]').checked = true;
+      document.getElementById("out").textContent = "已重置，点击“计算总分”。";
+    }
+  </script>
+</body>
+</html>
