@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>判断与案例记录</title>
+  <style>
+    body { font-family: system-ui, -apple-system, BlinkMacSystemFont;
+           max-width: 720px; margin: 40px auto; line-height: 1.7; }
+    h1 { margin-bottom: 24px; }
+    .item { margin-bottom: 22px; }
+    .meta { color: #666; font-size: 14px; }
+    a { text-decoration: none; color: #000; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <h1>判断与案例记录</h1>
+  <div id="list"></div>
+
+  <script>
+    fetch('data.json')
+      .then(res => res.json())
+      .then(data => {
+        const list = document.getElementById('list');
+        data.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'item';
+          div.innerHTML = `
+            <a href="${item.file}"><strong>${item.title}</strong></a>
+            <div class="meta">${item.date} ｜ ${item.type}</div>
+          `;
+          list.appendChild(div);
+        });
+      });
+  </script>
+</body>
+</html>
